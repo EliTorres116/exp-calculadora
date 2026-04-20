@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora eXp Realty — Analiza tu Inmobiliaria</title>
+<meta name="description" content="Descubre cuánto más podrías ganar bajo el modelo eXp Realty. Ingresa los datos de tu inmobiliaria y ve la comparación en tiempo real.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0f2444;
+  --navy-mid: #1b3a6b;
+  --navy-light: #2a5298;
+  --gold: #c9a84c;
+  --gold-light: #e8c96d;
+  --off-white: #f7f5f0;
+  --warm-gray: #e8e4dc;
+  --mid-gray: #9a9490;
+  --text-dark: #1a1816;
+  --text-mid: #4a4642;
+  --text-muted: #7a7672;
+  --success: #2d6a4f;
+  --success-bg: #d8f3dc;
+  --border: rgba(15,36,68,0.12);
+  --radius: 10px;
+  --radius-lg: 16px;
+  --shadow: 0 2px 20px rgba(15,36,68,0.08);
+  --shadow-lg: 0 8px 40px rgba(15,36,68,0.14);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--off-white);
+  color: var(--text-dark);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* NAV */
+nav {
+  background: var(--navy);
+  padding: 0 2rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-mark {
+  width: 36px; height: 36px;
+  background: var(--gold);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-logo-mark svg { width: 20px; height: 20px; }
+.nav-logo-text { font-size: 15px; font-weight: 500; color: #fff; letter-spacing: -0.01em; }
+.nav-logo-text span { color: var(--gold-light); }
+.nav-badge {
+  font-size: 11px; font-weight: 500;
+  color: var(--gold-light);
+  border: 1px solid rgba(201,168,76,0.35);
+  border-radius: 20px;
+  padding: 3px 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* HERO */
+.hero {
+  background: var(--navy);
+  padding: 4rem 2rem 5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 20% 50%, rgba(42,82,152,0.3) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 300px at 80% 20%, rgba(201,168,76,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 1.25rem;
+  padding: 5px 14px;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 20px;
+}
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  color: #fff;
+  line-height: 1.15;
+  max-width: 680px;
+  margin: 0 auto 1.25rem;
+  letter-spacing: -0.02em;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+.hero-sub {
+  font-size: 17px;
+  color: rgba(255,255,255,0.65);
+  max-width: 480px;
+  margin: 0 auto 2.5rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 15px; font-weight: 600;
+  padding: 13px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  cursor: pointer; border: none; font-family: inherit;
+}
+.hero-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+.hero-stats {
+  display: flex; align-items: center; justify-content: center; gap: 2.5rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+.hero-stat { text-align: center; }
+.hero-stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem; color: #fff; line-height: 1;
+}
+.hero-stat-num span { color: var(--gold-light); }
+.hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; letter-spacing: 0.04em; text-transform: uppercase; }
+.hero-divider { width: 1px; height: 36px; background: rgba(255,255,255,0.15); }
+
+/* MAIN FORM AREA */
+.form-wrapper {
+  max-width: 780px;
+  margin: -2rem auto 4rem;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.form-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+/* STEP PROGRESS */
+.progress-bar {
+  background: var(--navy);
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.prog-step { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.prog-dot {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.45);
+  font-size: 12px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s;
+}
+.prog-dot.active { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+.prog-dot.done { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); color: #fff; }
+.prog-label { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; }
+.prog-label.active { color: var(--gold-light); }
+.prog-line { flex: 1; height: 1px; background: rgba(255,255,255,0.15); margin-bottom: 16px; }
+
+/* FORM BODY */
+.form-body { padding: 2rem; }
+
+.step-view { display: none; }
+.step-view.active { display: block; animation: fadeSlide 0.3s ease; }
+@keyframes fadeSlide { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.step-heading { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--navy); margin-bottom: 4px; }
+.step-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 1.75rem; }
+
+/* FIELDS */
+.field { margin-bottom: 1.25rem; }
+.field label {
+  display: block; font-size: 13px; font-weight: 500;
+  color: var(--text-mid); margin-bottom: 6px; letter-spacing: -0.01em;
+}
+.field input, .field select {
+  width: 100%; padding: 10px 14px;
+  border: 1.5px solid var(--warm-gray);
+  border-radius: var(--radius);
+  font-size: 15px; font-family: 'DM Sans', sans-serif;
+  color: var(--text-dark);
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  appearance: none;
+}
+.field input:focus, .field select:focus {
+  outline: none;
+  border-color: var(--navy-mid);
+  box-shadow: 0 0 0 3px rgba(27,58,107,0.1);
+}
+.field input::placeholder { color: #bbb; }
+.hint { font-size: 12px; color: var(--text-muted); margin-top: 5px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+/* EXPENSE BLOCKS */
+.expense-block {
+  border: 1.5px solid var(--warm-gray);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.expense-block-header {
+  background: var(--off-white);
+  padding: 10px 14px;
+  font-size: 12px; font-weight: 600;
+  color: var(--text-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1.5px solid var(--warm-gray);
+}
+.expense-block-body { padding: 14px; }
+.inline-field {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--warm-gray);
+  gap: 12px;
+}
+.inline-field:last-child { border-bottom: none; }
+.inline-field label { font-size: 13px; color: var(--text-dark); flex: 1; }
+.inline-field input {
+  width: 130px; flex-shrink: 0;
+  padding: 6px 10px;
+  border: 1.5px solid var(--warm-gray);
+  border-radius: 8px;
+  font-size: 14px; font-family: 'DM Sans', sans-serif;
+  color: var(--text-dark);
+  text-align: right;
+  transition: border-color 0.15s;
+}
+.inline-field input:focus { outline: none; border-color: var(--navy-mid); }
+
+/* AGENTS */
+.agents-table { width: 100%; border-collapse: collapse; }
+.agents-table th { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; padding: 0 8px 8px; text-align: left; }
+.agents-table th:not(:first-child) { text-align: right; }
+.agents-table td { padding: 5px 8px; }
+.agents-table td input {
+  width: 100%; padding: 7px 10px;
+  border: 1.5px solid var(--warm-gray);
+  border-radius: 8px;
+  font-size: 13px; font-family: 'DM Sans', sans-serif;
+  color: var(--text-dark);
+}
+.agents-table td:not(:first-child) input { text-align: right; }
+.agents-table td input:focus { outline: none; border-color: var(--navy-mid); }
+.remove-btn {
+  width: 28px; height: 28px;
+  border: 1.5px solid var(--warm-gray);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer; font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.remove-btn:hover { background: #fef2f2; border-color: #fca5a5; color: #dc2626; }
+.add-agent-btn {
+  margin-top: 10px; width: 100%;
+  padding: 8px; font-size: 13px; font-weight: 500;
+  color: var(--navy-mid);
+  background: none; cursor: pointer;
+  border: 1.5px dashed rgba(27,58,107,0.3);
+  border-radius: var(--radius);
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+.add-agent-btn:hover { background: rgba(27,58,107,0.04); border-color: var(--navy-mid); }
+
+/* NAV BUTTONS */
+.nav-row { display: flex; gap: 10px; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--warm-gray); }
+.btn-back {
+  padding: 11px 22px;
+  background: transparent; color: var(--text-mid);
+  border: 1.5px solid var(--warm-gray);
+  border-radius: 50px; font-size: 14px; font-weight: 500;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+.btn-back:hover { border-color: var(--navy-mid); color: var(--navy); }
+.btn-next {
+  flex: 1; padding: 13px;
+  background: var(--navy); color: #fff;
+  border: none; border-radius: 50px;
+  font-size: 15px; font-weight: 500;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+  letter-spacing: -0.01em;
+}
+.btn-next:hover { background: var(--navy-light); }
+.btn-cta {
+  flex: 1; padding: 13px;
+  background: var(--gold); color: var(--navy);
+  border: none; border-radius: 50px;
+  font-size: 15px; font-weight: 600;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+.btn-cta:hover { background: var(--gold-light); }
+
+/* RESULTS */
+.results-hero {
+  background: var(--navy);
+  margin: -2rem -2rem 1.5rem;
+  padding: 2rem;
+  text-align: center;
+}
+.results-hero-label { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+.results-hero-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3.5rem; color: var(--gold-light);
+  line-height: 1;
+}
+.results-hero-sub { font-size: 14px; color: rgba(255,255,255,0.6); margin-top: 8px; }
+.results-hero-sub strong { color: #fff; font-weight: 500; }
+
+.compare-card {
+  border: 1.5px solid var(--warm-gray);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.compare-header {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  background: var(--off-white);
+  border-bottom: 1.5px solid var(--warm-gray);
+}
+.compare-header-cell {
+  padding: 10px 14px;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.compare-header-cell:not(:first-child) { text-align: right; border-left: 1px solid var(--warm-gray); }
+.compare-header-cell.exp-head { color: var(--navy-mid); }
+.compare-row-item {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--warm-gray);
+}
+.compare-row-item:last-child { border-bottom: none; }
+.compare-row-item.total-row { background: rgba(27,58,107,0.03); }
+.compare-cell {
+  padding: 11px 14px;
+  font-size: 14px;
+}
+.compare-cell.label { font-size: 13px; color: var(--text-mid); }
+.compare-cell.total-row .label { font-weight: 600; color: var(--text-dark); }
+.compare-cell:not(:first-child) { text-align: right; border-left: 1px solid var(--warm-gray); font-weight: 500; }
+.compare-cell.exp-num { color: var(--navy-mid); }
+.compare-cell.total-val { font-size: 16px; font-weight: 600; }
+
+.metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
+.metric-tile {
+  background: var(--off-white);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.metric-tile-label { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+.metric-tile-val { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--navy); }
+.metric-tile-val.gold { color: var(--gold); }
+
+.revshare-card {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+.revshare-card h4 { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+.revshare-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 13px; }
+.revshare-row:last-child { border-bottom: none; }
+.revshare-row-label { color: rgba(255,255,255,0.65); }
+.revshare-row-val { font-weight: 600; color: var(--gold-light); }
+
+.fees-card {
+  border: 1.5px solid var(--warm-gray);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+.fees-card h4 { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem; }
+.fees-list { list-style: none; }
+.fees-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--text-mid); padding: 6px 0; border-bottom: 1px solid var(--warm-gray); }
+.fees-list li:last-child { border-bottom: none; }
+.fees-list li::before { content: '→'; color: var(--gold); font-weight: 600; flex-shrink: 0; margin-top: 1px; }
+.fees-list strong { color: var(--text-dark); font-weight: 600; }
+
+.disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--warm-gray); }
+
+/* FOOTER */
+footer {
+  background: var(--navy);
+  text-align: center;
+  padding: 2rem;
+  color: rgba(255,255,255,0.4);
+  font-size: 13px;
+}
+footer a { color: var(--gold-light); text-decoration: none; }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .grid2, .grid3 { grid-template-columns: 1fr; }
+  .form-body { padding: 1.25rem; }
+  .progress-bar { padding: 1rem 1.25rem; }
+  .prog-label { display: none; }
+  .hero { padding: 3rem 1.25rem 4rem; }
+  .hero-stats { gap: 1.5rem; }
+  .hero-divider { display: none; }
+  .metrics-grid { grid-template-columns: 1fr 1fr; }
+  .compare-cell { padding: 9px 10px; font-size: 12px; }
+  .inline-field input { width: 110px; }
+  .results-hero-num { font-size: 2.5rem; }
+  nav { padding: 0 1.25rem; }
+  .nav-badge { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 20 20" fill="none">
+        <path d="M2 10L10 2L18 10" stroke="#0f2444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 8.5V17H8V13H12V17H16V8.5" stroke="#0f2444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <span class="nav-logo-text">e<span>X</span>p Realty</span>
+  </a>
+  <div class="nav-badge">Puerto Rico</div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Herramienta de análisis confidencial</div>
+  <h1>¿Cuánto más podría ganar <em>tu inmobiliaria</em>?</h1>
+  <p class="hero-sub">Ingresa los datos de tu negocio actual y ve la comparación en tiempo real con el modelo eXp.</p>
+  <button class="hero-cta" onclick="document.getElementById('form-section').scrollIntoView({behavior:'smooth'})">
+    Comenzar mi análisis →
+  </button>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">80<span>%</span></div>
+      <div class="hero-stat-label">Split al agente</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">$16<span>k</span></div>
+      <div class="hero-stat-label">Cap anual USD</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">17.5<span>%</span></div>
+      <div class="hero-stat-label">Revenue Share T1</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">$0</div>
+      <div class="hero-stat-label">Renta de oficina</div>
+    </div>
+  </div>
+</section>
+
+<section id="form-section" style="padding-top: 3rem;">
+<div class="form-wrapper">
+  <div class="form-card">
+
+    <div class="progress-bar">
+      <div class="prog-step">
+        <div class="prog-dot active" id="dot-1">1</div>
+        <div class="prog-label active" id="lbl-1">Tu negocio</div>
+      </div>
+      <div class="prog-line"></div>
+      <div class="prog-step">
+        <div class="prog-dot" id="dot-2">2</div>
+        <div class="prog-label" id="lbl-2">Producción</div>
+      </div>
+      <div class="prog-line"></div>
+      <div class="prog-step">
+        <div class="prog-dot" id="dot-3">3</div>
+        <div class="prog-label" id="lbl-3">Gastos</div>
+      </div>
+      <div class="prog-line"></div>
+      <div class="prog-step">
+        <div class="prog-dot" id="dot-4">4</div>
+        <div class="prog-label" id="lbl-4">Resultados</div>
+      </div>
+    </div>
+
+    <div class="form-body">
+
+      <!-- STEP 1 -->
+      <div class="step-view active" id="step-1">
+        <h2 class="step-heading">Cuéntanos sobre ti</h2>
+        <p class="step-sub">Información confidencial — solo para preparar tu análisis personalizado.</p>
+        <div class="field">
+          <label>Tu nombre completo</label>
+          <input type="text" id="nombre" placeholder="Ej. Carlos Ramírez">
+        </div>
+        <div class="field">
+          <label>Nombre de tu inmobiliaria</label>
+          <input type="text" id="inmobiliaria" placeholder="Ej. Century Homes PR">
+        </div>
+        <div class="grid2">
+          <div class="field">
+            <label>Ciudad / Municipio</label>
+            <input type="text" id="ciudad" placeholder="Ej. San Juan, PR">
+          </div>
+          <div class="field">
+            <label>Correo electrónico</label>
+            <input type="email" id="email_prospecto" placeholder="tu@correo.com">
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="field">
+            <label>Años en el negocio</label>
+            <input type="number" id="anios" placeholder="Ej. 8" min="0">
+          </div>
+          <div class="field">
+            <label>Membresía</label>
+            <select id="asociacion">
+              <option value="">Selecciona...</option>
+              <option>NAR / PRRA</option>
+              <option>Otra asociación</option>
+              <option>No pertenezco</option>
+            </select>
+          </div>
+        </div>
+        <div class="nav-row">
+          <button class="btn-next" onclick="goTo(2)">Siguiente — Producción →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step-view" id="step-2">
+        <h2 class="step-heading">Tu equipo y producción</h2>
+        <p class="step-sub">Datos de los últimos 12 meses. Usa promedios si no tienes el número exacto.</p>
+
+        <div class="grid2">
+          <div class="field">
+            <label>Agentes activos</label>
+            <input type="number" id="total_agentes" placeholder="Ej. 12" min="1">
+          </div>
+          <div class="field">
+            <label>Transacciones totales en el año</label>
+            <input type="number" id="transacciones" placeholder="Ej. 48" min="0">
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="field">
+            <label>Volumen total de ventas (USD)</label>
+            <input type="number" id="vol_total" placeholder="Ej. 8,500,000" min="0">
+            <div class="hint">Suma del precio de todas las propiedades vendidas</div>
+          </div>
+          <div class="field">
+            <label>Comisión promedio (%)</label>
+            <input type="number" id="comision_pct" placeholder="Ej. 5" min="0" max="20" step="0.1">
+            <div class="hint">% de comisión que cobra tu inmobiliaria</div>
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="field">
+            <label>Split a tus agentes (%)</label>
+            <input type="number" id="split_agentes" placeholder="Ej. 60" min="0" max="100">
+            <div class="hint">Del GCI total, ¿qué % reciben tus agentes?</div>
+          </div>
+          <div class="field">
+            <label>Transacciones post-cap por agente (est.)</label>
+            <input type="number" id="postcap_txs" placeholder="Ej. 5" min="0">
+            <div class="hint">Promedio después de alcanzar el cap anual</div>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--warm-gray); padding-top: 1.25rem; margin-top: 0.5rem;">
+          <div style="font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px;">Agentes principales (opcional)</div>
+          <table class="agents-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th style="text-align:right">Transacciones</th>
+                <th style="text-align:right">Volumen (USD)</th>
+                <th style="text-align:right">GCI (USD)</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="agents-list"></tbody>
+          </table>
+          <button class="add-agent-btn" onclick="addAgent()">+ Agregar agente</button>
+        </div>
+
+        <div class="nav-row">
+          <button class="btn-back" onclick="goTo(1)">← Atrás</button>
+          <button class="btn-next" onclick="goTo(3)">Siguiente — Gastos →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step-view" id="step-3">
+        <h2 class="step-heading">Gastos de tu inmobiliaria</h2>
+        <p class="step-sub">Ingresa tus gastos mensuales actuales en USD. Deja en 0 lo que no aplique.</p>
+
+        <div class="expense-block">
+          <div class="expense-block-header">Gastos fijos mensuales</div>
+          <div class="expense-block-body">
+            <div class="inline-field"><label>Renta / oficina</label><input type="number" id="g_oficina" placeholder="0" min="0"></div>
+            <div class="inline-field"><label>Staff administrativo</label><input type="number" id="g_staff" placeholder="0" min="0"></div>
+            <div class="inline-field"><label>Dirección / gerencia</label><input type="number" id="g_direccion" placeholder="0" min="0"></div>
+            <div class="inline-field"><label>Contabilidad / legal</label><input type="number" id="g_contable" placeholder="0" min="0"></div>
+            <div class="inline-field"><label>Celulares y comunicación</label><input type="number" id="g_celulares" placeholder="0" min="0"></div>
+            <div class="inline-field"><label>Otros gastos fijos</label><input type="number" id="g_otros_fijos" placeholder="0" min="0"></div>
+          </div>
+        </div>
+
+        <div class="expense-block">
+          <div class="expense-block-header">Marketing y tecnología (mensual)</div>
+          <div class="expense-block-body">
+            <div class="inline-field"><label>Portales (Zillow, Realtor.com, etc.)</label><input type="number" id="g_portales" placeholder="0" min="0"></div>
+            <div class="inline-field"><label>Google Ads / Meta Ads</label><input type="number" id="g_ads" placeholder="0" min="0"></div>
+            <div class="inline-field"><label>CRM / sistemas</label><input type="number" id="g_sistemas" placeholder="0" min="0"></div>
+            <div class="inline-field"><label>Capacitación / coaching</label><input type="number" id="g_capacitacion" placeholder="0" min="0"></div>
+            <div class="inline-field"><label>Otros marketing</label><input type="number" id="g_otros_mkt" placeholder="0" min="0"></div>
+          </div>
+        </div>
+
+        <div class="expense-block">
+          <div class="expense-block-header">Gastos variables por operación</div>
+          <div class="expense-block-body">
+            <div class="inline-field"><label>Fotografía</label><input type="number" id="g_foto" placeholder="0" min="0"></div>
+            <div class="inline-field"><label>Video / tour virtual</label><input type="number" id="g_video" placeholder="0" min="0"></div>
+            <div class="inline-field"><label>Señalización / materiales</label><input type="number" id="g_lonas" placeholder="0" min="0"></div>
+          </div>
+        </div>
+
+        <div class="nav-row">
+          <button class="btn-back" onclick="goTo(2)">← Atrás</button>
+          <button class="btn-next" onclick="calcular()">Ver mis resultados →</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: RESULTS -->
+      <div class="step-view" id="step-4">
+        <div id="results-content"></div>
+        <div class="nav-row">
+          <button class="btn-back" onclick="goTo(3)">← Editar datos</button>
+          <button class="btn-cta" onclick="window.location.href='mailto:Eli.Torres@exprealty.net?subject=Quiero%20hablar%20sobre%20mi%20an%C3%A1lisis%20eXp'">Hablar con un asesor →</button>
+        </div>
+      </div>
+
+    </div><!-- /form-body -->
+  </div><!-- /form-card -->
+</div><!-- /form-wrapper -->
+</section>
+
+<footer>
+  <p style="margin-bottom:6px;">eXp Realty Puerto Rico — Herramienta de análisis confidencial</p>
+  <p>¿Preguntas? <a href="mailto:Eli.Torres@exprealty.net">Eli.Torres@exprealty.net</a></p>
+</footer>
+
+<script>
+let agentCount = 0;
+
+function goTo(n) {
+  document.querySelectorAll('.step-view').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-' + n).classList.add('active');
+  for (let i = 1; i <= 4; i++) {
+    const dot = document.getElementById('dot-' + i);
+    const lbl = document.getElementById('lbl-' + i);
+    dot.classList.remove('active','done');
+    lbl.classList.remove('active');
+    if (i < n) { dot.classList.add('done'); dot.textContent = '✓'; }
+    else if (i === n) { dot.classList.add('active'); lbl.classList.add('active'); dot.textContent = i; }
+    else dot.textContent = i;
+  }
+  window.scrollTo({ top: document.getElementById('form-section').offsetTop - 80, behavior: 'smooth' });
+}
+
+function addAgent() {
+  if (agentCount >= 8) return;
+  agentCount++;
+  const id = 'ag' + agentCount;
+  const tr = document.createElement('tr');
+  tr.id = 'agrow-' + id;
+  tr.innerHTML = `
+    <td><input type="text" placeholder="Nombre" id="${id}_nombre"></td>
+    <td><input type="number" placeholder="0" id="${id}_txs" min="0"></td>
+    <td><input type="number" placeholder="0" id="${id}_vol" min="0"></td>
+    <td><input type="number" placeholder="0" id="${id}_gci" min="0"></td>
+    <td><button class="remove-btn" onclick="document.getElementById('agrow-${id}').remove()">×</button></td>`;
+  document.getElementById('agents-list').appendChild(tr);
+}
+
+function v(id) { const e = document.getElementById(id); return e ? (parseFloat(e.value) || 0) : 0; }
+function s(id) { const e = document.getElementById(id); return e ? e.value.trim() : ''; }
+function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+function fmtPct(n) { return (Math.round(Math.abs(n) * 10) / 10).toFixed(1) + '%'; }
+
+function calcExpFee(gci) { return Math.min(gci * 0.20, 16000); }
+function calcPostCapFees(txs) { return txs <= 20 ? txs * 250 : (20 * 250) + ((txs - 20) * 75); }
+function calcRevShare(gci) { return calcExpFee(gci) * 0.175; }
+
+function calcular() {
+  const nAgentes   = Math.max(v('total_agentes'), 1);
+  const volTotal   = v('vol_total');
+  const comPct     = v('comision_pct') / 100;
+  const splitAg    = v('split_agentes') / 100;
+  const txsTotal   = Math.max(v('transacciones'), 1);
+  const postCapTxs = v('postcap_txs');
+
+  const gciTotal     = volTotal * comPct;
+  const gciPerAgent  = gciTotal / nAgentes;
+  const txsPerAgent  = txsTotal / nAgentes;
+
+  // Current model
+  const costoVentaActual  = gciTotal * splitAg;
+  const ingresoNetoActual = gciTotal - costoVentaActual;
+  const gastosFijosM  = v('g_oficina') + v('g_staff') + v('g_direccion') + v('g_contable') + v('g_celulares') + v('g_otros_fijos');
+  const gastosMktM    = v('g_portales') + v('g_ads') + v('g_sistemas') + v('g_capacitacion') + v('g_otros_mkt');
+  const gastosVarUnit = v('g_foto') + v('g_video') + v('g_lonas');
+  const gastosFijosA  = gastosFijosM * 12;
+  const gastosMktA    = gastosMktM * 12;
+  const gastosVarA    = gastosVarUnit * txsTotal;
+  const gastosTotalesA = gastosFijosA + gastosMktA + gastosVarA;
+  const utilidadActual = ingresoNetoActual - gastosTotalesA;
+
+  // eXp model
+  const brokerGCI        = gciPerAgent;
+  const brokerExpFee     = calcExpFee(brokerGCI);
+  const brokerCloudFee   = 1020;
+  const brokerPostCapFee = calcPostCapFees(postCapTxs);
+  const brokerExpCosts   = brokerExpFee + brokerCloudFee + brokerPostCapFee;
+
+  const totalRevShare = nAgentes * calcRevShare(gciPerAgent);
+
+  const brokerNetGCI   = brokerGCI * 0.80;
+  const ingresoExpTotal = brokerNetGCI + totalRevShare;
+
+  const gastosExpFijosM = v('g_staff') + v('g_direccion') + v('g_contable') + v('g_celulares') + v('g_otros_fijos');
+  const gastosExpMktM   = v('g_ads') + v('g_otros_mkt');
+  const gastosExpFijosA = gastosExpFijosM * 12;
+  const gastosExpMktA   = gastosExpMktM * 12;
+  const gastosExpTotal  = gastosExpFijosA + gastosExpMktA + gastosVarA + brokerExpCosts;
+
+  const utilidadExp  = ingresoExpTotal - gastosExpTotal;
+  const diferencia   = utilidadExp - utilidadActual;
+  const pctMejora    = utilidadActual !== 0 ? (diferencia / Math.abs(utilidadActual)) * 100 : 0;
+
+  const officeRentA  = v('g_oficina') * 12;
+  const techSavings  = (v('g_sistemas') + v('g_capacitacion')) * 12;
+  const revSharePA   = calcRevShare(gciPerAgent);
+  const inmob        = s('inmobiliaria') || 'tu inmobiliaria';
+
+  const resultsHTML = `
+    <div class="results-hero">
+      <div class="results-hero-label">Diferencia estimada en utilidad anual</div>
+      <div class="results-hero-num">${diferencia >= 0 ? '+' : ''}${fmt(diferencia)}</div>
+      <div class="results-hero-sub">
+        ${diferencia >= 0
+          ? `Eso es <strong>${fmtPct(pctMejora)} más rentabilidad</strong> bajo el modelo eXp — sin cambiar tu producción actual.`
+          : `Platiquemos para encontrar la mejor estrategia de transición para <strong>${inmob}</strong>.`}
+      </div>
+    </div>
+
+    <div class="compare-card">
+      <div class="compare-header">
+        <div class="compare-header-cell">Concepto</div>
+        <div class="compare-header-cell">Modelo actual</div>
+        <div class="compare-header-cell exp-head">Modelo eXp</div>
+      </div>
+      ${[
+        ['GCI total generado',       fmt(gciTotal),            fmt(gciTotal)],
+        ['Split a agentes',          fmt(costoVentaActual),    fmt(gciTotal * 0.80)],
+        ['Ingreso bruto del broker', fmt(ingresoNetoActual),   fmt(brokerNetGCI)],
+        ['Gastos operativos',        fmt(gastosTotalesA),      fmt(gastosExpTotal)],
+        ['Revenue Share',            '—',                      fmt(totalRevShare)],
+      ].map(([l,c,e]) => `
+        <div class="compare-row-item">
+          <div class="compare-cell label">${l}</div>
+          <div class="compare-cell">${c}</div>
+          <div class="compare-cell exp-num">${e}</div>
+        </div>`).join('')}
+      <div class="compare-row-item total-row">
+        <div class="compare-cell label" style="font-weight:600;color:var(--text-dark)">Utilidad neta estimada</div>
+        <div class="compare-cell total-val">${fmt(utilidadActual)}</div>
+        <div class="compare-cell exp-num total-val">${fmt(utilidadExp)}</div>
+      </div>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-tile">
+        <div class="metric-tile-label">Ahorro en renta</div>
+        <div class="metric-tile-val gold">${fmt(officeRentA)}/año</div>
+      </div>
+      <div class="metric-tile">
+        <div class="metric-tile-label">Ahorro en tech</div>
+        <div class="metric-tile-val gold">${fmt(techSavings)}/año</div>
+      </div>
+      <div class="metric-tile">
+        <div class="metric-tile-label">Revenue Share total</div>
+        <div class="metric-tile-val gold">${fmt(totalRevShare)}/año</div>
+      </div>
+      <div class="metric-tile">
+        <div class="metric-tile-label">Rev Share por agente</div>
+        <div class="metric-tile-val gold">${fmt(revSharePA)}/año</div>
+      </div>
+    </div>
+
+    <div class="revshare-card">
+      <h4>Desglose de tu Revenue Share — Tier 1</h4>
+      <div class="revshare-row">
+        <span class="revshare-row-label">GCI promedio por agente</span>
+        <span class="revshare-row-val">${fmt(gciPerAgent)}</span>
+      </div>
+      <div class="revshare-row">
+        <span class="revshare-row-label">Aporte eXp por agente (20%, cap $16k)</span>
+        <span class="revshare-row-val">${fmt(Math.min(gciPerAgent * 0.20, 16000))}</span>
+      </div>
+      <div class="revshare-row">
+        <span class="revshare-row-label">Tu Revenue Share (17.5% del aporte eXp)</span>
+        <span class="revshare-row-val">${fmt(revSharePA)}/agente/año</span>
+      </div>
+      <div class="revshare-row">
+        <span class="revshare-row-label">Total con tus ${nAgentes} agentes actuales</span>
+        <span class="revshare-row-val">${fmt(totalRevShare)}/año</span>
+      </div>
+    </div>
+
+    <div class="fees-card">
+      <h4>Estructura eXp aplicada en este análisis</h4>
+      <ul class="fees-list">
+        <li>Split <strong>80% agente / 20% eXp</strong> con cap de <strong>$16,000 USD/año</strong> por agente</li>
+        <li>Cloud brokerage fee: <strong>$85/mes</strong> por agente ($1,020/año)</li>
+        <li>Post-cap: <strong>$250/transacción</strong> — baja a <strong>$75/tx</strong> después de 20 transacciones post-cap (resetea en aniversario)</li>
+        <li>Revenue Share Tier 1: <strong>17.5%</strong> del aporte eXp de cada agente directo</li>
+        <li>Tecnología, capacitación y eXpWorld: <strong>incluidos sin costo adicional</strong></li>
+      </ul>
+    </div>
+
+    <p class="disclaimer">Disclaimer: Este análisis es de carácter referencial y se elabora con los datos ingresados por el usuario. Los resultados reales pueden variar según condiciones de mercado, producción individual de los agentes y estructura de cada inmobiliaria. Este ejercicio no constituye una garantía de resultados ni un contrato de ningún tipo.</p>
+  `;
+
+  document.getElementById('results-content').innerHTML = resultsHTML;
+  goTo(4);
+
+  // Email notification via mailto fallback
+  const body = encodeURIComponent(
+    `NUEVO PROSPECTO — eXp Realty PR\n\n` +
+    `Nombre: ${s('nombre')}\nInmobiliaria: ${inmob}\nCiudad: ${s('ciudad')}\nEmail: ${s('email_prospecto')}\n\n` +
+    `DATOS:\nAgentes: ${nAgentes}\nVolumen: ${fmt(volTotal)}\nGCI: ${fmt(gciTotal)}\nGCI/agente: ${fmt(gciPerAgent)}\nTransacciones: ${v('transacciones')}\n\n` +
+    `RESULTADOS:\nUtilidad actual: ${fmt(utilidadActual)}\nUtilidad eXp: ${fmt(utilidadExp)}\nDiferencia: ${fmt(diferencia)} (${fmtPct(pctMejora)})\nRevenue Share: ${fmt(totalRevShare)}/año`
+  );
+  const notifLink = document.createElement('a');
+  notifLink.href = `mailto:Eli.Torres@exprealty.net?subject=Nuevo%20prospecto%3A%20${encodeURIComponent(inmob)}&body=${body}`;
+  notifLink.style.display = 'none';
+  document.body.appendChild(notifLink);
+  notifLink.click();
+  document.body.removeChild(notifLink);
+}
+</script>
+</body>
+</html>
